@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ActorsEntity } from './actors.entity';
-import { CreateActorDto, UpdateActorDto } from './dto/actors.dto';
+import { ActorDto } from './dto/actors.dto';
 
 @Injectable()
 export class ActorsService {
@@ -21,14 +21,14 @@ export class ActorsService {
     return actor;
   }
 
-  async createActor(createActorDto: CreateActorDto): Promise<ActorsEntity> {
+  async createActor(createActorDto: ActorDto): Promise<ActorsEntity> {
     const newActor = this.actorsRepository.create(createActorDto);
     return this.actorsRepository.save(newActor);
   }
 
   async updateActor(
     id: number,
-    updateActorDto: UpdateActorDto,
+    updateActorDto: ActorDto,
   ): Promise<ActorsEntity> {
     const actor = await this.getActorById(id);
     const updatedActor = this.actorsRepository.merge(actor, updateActorDto);
