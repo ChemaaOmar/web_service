@@ -13,7 +13,10 @@ import { ActorDto } from './dto/actors.dto';
 import { ActorsEntity } from './actors.entity';
 import { Response } from 'express';
 import { EtagService } from '../../shared/middleware/etag.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Actors')
+@ApiBearerAuth('api-key')
 @Controller('actor')
 export class ActorsController {
   constructor(
@@ -44,6 +47,7 @@ export class ActorsController {
   }
 
   @Put(':id')
+  @ApiBearerAuth('etag')
   updateActor(
     @Param('id') id: number,
     @Body() updateActorDto: ActorDto,

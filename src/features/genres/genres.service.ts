@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { GenresEntity } from './genres.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateGenreDto } from './dto/genres.dto';
+import { GenreDto } from './dto/genres.dto';
 
 @Injectable()
 export class GenresService {
@@ -15,7 +15,7 @@ export class GenresService {
     return this.genresRepository.find();
   }
 
-  async createGenre(createGenreDto: CreateGenreDto): Promise<GenresEntity> {
+  async createGenre(createGenreDto: GenreDto): Promise<GenresEntity> {
     return this.genresRepository.save(createGenreDto);
   }
 

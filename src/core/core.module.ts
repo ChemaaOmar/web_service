@@ -5,6 +5,7 @@ import { ActorsModule } from '../features/actors/actors.module';
 import { FilmsModule } from '../features/films/films.module';
 import { GenresModule } from '../features/genres/genres.module';
 import { ApiKeyMiddleware } from '../shared/middleware/apikey.middleware';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ApiKeyMiddleware } from '../shared/middleware/apikey.middleware';
       entities: [path.join(__dirname, '../features/**/*.entity{.ts,.js}')],
       synchronize: true,
     }),
+    ConfigModule.forRoot(),
     ActorsModule,
     FilmsModule,
     GenresModule,

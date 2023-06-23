@@ -1,7 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { GenresService } from './genres.service';
-import { CreateGenreDto } from './dto/genres.dto';
+import { GenreDto } from './dto/genres.dto';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Genres')
+@ApiBearerAuth('api-key')
 @Controller('genre')
 export class GenresController {
   constructor(private readonly genresService: GenresService) {}
@@ -12,7 +15,7 @@ export class GenresController {
   }
 
   @Post()
-  createGenre(@Body() createGenreDto: CreateGenreDto) {
+  createGenre(@Body() createGenreDto: GenreDto) {
     return this.genresService.createGenre(createGenreDto);
   }
 

@@ -13,7 +13,10 @@ import { FilmsEntity } from './films.entity';
 import { FilmDto } from './dto/films.dto';
 import { EtagService } from '../../shared/middleware/etag.service';
 import { Response } from 'express';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Films')
+@ApiBearerAuth('api-key')
 @Controller('film')
 export class FilmsController {
   constructor(
@@ -44,6 +47,7 @@ export class FilmsController {
   }
 
   @Put(':id')
+  @ApiBearerAuth('etag')
   updateFilm(
     @Param('id') id: number,
     @Body() updateFilmDto: FilmDto,
